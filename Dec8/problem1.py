@@ -1,29 +1,27 @@
-def getMaxPos(positions):
-    maxVal = 0
-    for pos in positions:
-        if pos > maxVal:
-            maxVal = pos
-    return maxVal
-
 
 def main():
-    positions = []
+    unique = 0
     with open('input.txt') as f:
         for line in f:
-            positions = [int(pos, 10) for pos in line.strip().split(",")]
+            digits, output = line.strip().split(" | ")
+            digits = digits.split(" ")
+            output = output.split(" ")
 
-    maxVal = getMaxPos(positions)
+            for segment in output:
+                if len(segment) == 2:
+                    # This is a 1
+                    unique += 1
+                elif len(segment) == 3:
+                    # This is a 7
+                    unique += 1
+                elif len(segment) == 4:
+                    # This is a 4
+                    unique += 1
+                elif len(segment) == 7:
+                    # this is an 8
+                    unique += 1
 
-    leastFuel = maxVal * len(positions)
-    for alignment in range(0, maxVal):
-        sum = 0
-        for pos in positions:
-            sum += abs(pos - alignment)
-
-        if sum < leastFuel:
-            leastFuel = sum
-
-    print(leastFuel)
+    print(unique)
 
 
 if __name__ == '__main__':
